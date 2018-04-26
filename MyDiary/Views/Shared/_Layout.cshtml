@@ -1,0 +1,68 @@
+﻿@using MyDiary.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body class="container">
+    <header>
+        @*header显示的是导航，主要用于网站logo以及用户名和登录*@
+        @*navbar-inverse是一个反转导航条*@
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">@*用来做导航条内的间距*@
+                @*追加一个表头，导航条的头部文件*@ 
+                <div class="navbar-header">
+                    @*追加一个logo，navbar-brand品牌*@
+                    <div class="navbar-brand">
+                        @*我的日记*@
+                        <a href="~/Home/Index">MyDiary</a>
+                    </div>
+                </div>
+                @*制作菜单,navbar-collapse是导航条的折叠菜单*@
+                <div class="collapse navbar-collapse">
+                    @*nav导航，导航条中的nav导航，navbar-right显示到最右侧，右对齐*@
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @{ 
+                                var UserName = Session["User"] == null ? string.Empty : ((User)Session["User"]).UserName;
+                            }
+                            <a href="#">@UserName</a>
+                        </li>
+                        <li>
+                            @*Login | Logoff是根据用户状态来单独显示出来*@
+                            @*如果用户登录成功显示的是注销按钮，如果用户登录失败显示的是登录按钮*@
+                            @if (Session["User"] == null)//代表用户现在没有登录
+                            {
+                                <a href="~/Account/Login">Login</a>
+                            }
+                            else
+                            {
+                                <a href="~/Account/Logoff">Logoff</a>//注销事件
+                            }
+
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <h2 class="page-header">@ViewBag.Title</h2>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        @*默认样式固定到页面底部的居中，主要显示版权信息*@
+        <nav class="navbar-default navbar-fixed-bottom text-center">
+            &copy; @DateTime.Now.Year
+        </nav>
+    </footer>
+</body>
+</html>

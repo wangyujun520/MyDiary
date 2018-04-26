@@ -1,0 +1,23 @@
+﻿@model MyDiary.Models.Diary
+@{
+    ViewBag.Title = "Home Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false) @*显示所有错误消息*@
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Enter Title" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Content)
+        @Html.TextBoxFor(m => m.Content, new { @class = "form-control", placeholder = "Enter Content" })
+    </div>
+
+    <p class="text-right">@*放置在右侧*@
+        <button type="submit" class="btn btn-primary">Create</button>@*提交按钮*@
+    </p>
+}

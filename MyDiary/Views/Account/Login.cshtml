@@ -1,0 +1,34 @@
+﻿@model MyDiary.Models.User
+
+@{ 
+    ViewBag.Title = "Account Login";
+}
+
+@using (Html.BeginForm(""))
+{
+    @Html.ValidationSummary(false)
+
+    <div class="form-group">@*表单组*@
+        @Html.LabelFor(m=>m.UserName)@*来根据当前页面绑定的强类型user生成他的用户名的label标签*@
+        @Html.TextBoxFor(m=>m.UserName,new { @class="form-control",placeholder="Enter UserName"})
+    </div>
+    <div class="form-group">@*表单组*@
+        @Html.LabelFor(m=>m.PassWord)@*来根据当前页面绑定的强类型user生成他的用户名的label标签*@
+        @Html.PasswordFor(m=>m.PassWord, new { @class="form-control",placeholder= "Enter PassWord" })
+    </div>
+    //按钮组，放在右侧
+    <div class="btn-group pull-right">
+        <button type="submit" class="btn btn-primary" id="btnLogin">Login</button>
+        <button type="button" class="btn btn-default" id="btnRegister">Register</button>
+    </div>
+    //涉及到了pull - right所以要清除浮动效果
+    <div class="clearfix"></div>
+}
+
+    <script>
+        $(function () {
+            $("#btnRegister").click(function () {/*Register注册点击事件*/
+                location.href = "@Url.Content("~/Account/Register")";/*跳转到注册页*/
+            });
+        });
+    </script>

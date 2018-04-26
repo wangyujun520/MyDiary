@@ -1,0 +1,34 @@
+﻿@model List<MyDiary.Models.Diary>
+@{
+    ViewBag.Title = "Home Index";
+}
+@*带边框，紧凑型表格，鼠标悬浮到上面有颜色变化，隔行变色*@
+<table class="table table-bordered table-condensed table-hover table-striped">
+    <tr>
+        <td colspan="5">
+            <a href="@Url.Content("~/Home/Create")">Create</a>
+        </td>
+    </tr>
+    <tr>
+        @*<td>Id</td>*@
+        <td>@Html.LabelFor(m=>m[0].Id)</td>
+        <td>Title</td>
+        <td>User</td>
+        <td>PubDate</td>
+        <td>操作</td>
+    </tr>
+    @foreach (var diary in Model)
+    {
+    <tr>
+        @*<td>@diary.Id</td>*@
+        <td>@Html.DisplayFor(m => diary.Id)</td>
+        <td>@diary.Title</td>
+        <td>@diary.User.UserName</td>
+        <td>@diary.PubDate</td>
+        <td>
+            <a href="~/Home/Remove?id=@diary.Id">Remove</a>
+            @*<a href="@Url.Content("~/Home/Remove"+@diary.Id)">Remove</a>*@
+        </td>
+    </tr>
+    }
+</table>
